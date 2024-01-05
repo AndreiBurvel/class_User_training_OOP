@@ -38,7 +38,7 @@ class User:
     @property
     def secret(self):
         """Возвращает секрет если пароль верен."""
-        get = input('Your password: ')
+        get = input('Ваш пароль: ')
         if get == self.password:
             return self.__secret
         raise ValueError('Вы не имеете доступ к данному материалу.')
