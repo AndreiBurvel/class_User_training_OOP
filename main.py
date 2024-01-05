@@ -2,11 +2,11 @@ from list_password_often import password_often
 
 class User:
     """Класс пользователя с исенем, паролем и секретом(доступным по паролю)"""
-    def __init__(self, name, password, secret):
+    def __init__(self, name, password):
         """Инициализация атрибутов класса."""
         self.name = name
-        self.__password = password
-        self.__secret = secret
+        self.password = password
+        self.__secret = 'Python - лучший ЯП.'
 
     @staticmethod
     def examination(value):
@@ -18,9 +18,11 @@ class User:
 
     @property
     def password(self):
+        """Возврат значения пароля."""
         return self.__password
     @password.setter
     def password(self, value):
+        """Установка пароля если он удовлетворяет всем проверкам."""
         if not isinstance(value, str):
             raise TypeError('Пароль должен быть строкой.')
         if len(value) < 4:
@@ -31,3 +33,15 @@ class User:
             raise ValueError('В пароле должна присутствовать цифра.')
         if value in password_often:
             raise ValueError('Это слишком распространённый пароль, попробуйте другой.')
+        self.__password = value
+
+    @property
+    def secret(self):
+        """Возвращает секрет если пароль верен."""
+        get = input('Your password: ')
+        if get == self.password:
+            return self.__secret
+        raise ValueError('Вы не имеете доступ к данному материалу.')
+
+max = User('Max', 'gruden1')
+print(max.secret)
